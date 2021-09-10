@@ -1,34 +1,34 @@
 package com.gym.workout.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Client {
+public class Personal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer register;
     private String name;
     private String email;
     private LocalDate birthDate;
     private TypeUser typeUser;
     private String password;
-    @ManyToOne
-    private Personal personal;
+    @OneToMany(mappedBy = "personal")
+    private List<Client> clients = new ArrayList<>();
 
-    public Client() {}
+    public Personal() {}
 
-    public Client(Integer register, String name, String email, LocalDate birthDate, TypeUser typeUser, String password) {
+    public Personal(String name, String email, LocalDate birthDate, TypeUser typeUser, String password) {
         this.id = id;
-        this.register = register;
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
@@ -42,14 +42,6 @@ public class Client {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getRegister() {
-        return register;
-    }
-
-    public void setRegister(Integer register) {
-        this.register = register;
     }
 
     public String getName() {
@@ -88,16 +80,16 @@ public class Client {
         return typeUser;
     }
 
-    public void setTypeUser(TypeUser TypeUser) {
+    public void setTypeUser(TypeUser typeUser) {
         this.typeUser = typeUser;
     }
 
-    public Personal getPersonal() {
-        return personal;
+    public List<Client> getClients() {
+        return clients;
     }
 
-    public void setPersonal(Personal personal) {
-        this.personal = personal;
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
     }
 
     @Override
@@ -108,8 +100,8 @@ public class Client {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Client client = (Client) o;
-        return id.equals(client.id);
+        Personal personal = (Personal) o;
+        return id.equals(personal.id);
     }
 
     @Override
@@ -119,6 +111,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" + "register=" + register + ", name='" + name + '\'' + ", email='" + email + '\'' + '}';
+        return "Personal{" + " name='" + name + '\'' + ", email='" + email + '\'' + '}';
     }
 }
