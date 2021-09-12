@@ -1,0 +1,1 @@
+INSERT INTO REGISTER(id, register) VALUES(1, 999);
