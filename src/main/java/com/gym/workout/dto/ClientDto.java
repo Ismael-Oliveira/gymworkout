@@ -1,12 +1,14 @@
 package com.gym.workout.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
+import com.gym.workout.model.Card;
 import com.gym.workout.model.Client;
+import com.gym.workout.model.Performance;
 import com.gym.workout.model.TypeUser;
 
 public class ClientDto {
@@ -16,6 +18,8 @@ public class ClientDto {
     private String email;
     private LocalDate birthDate;
     private TypeUser typeUser;
+    private Card card;
+    private List<Performance> performances = new ArrayList<>();
 
     public ClientDto(Client client) {
         this.id = client.getId();
@@ -23,6 +27,8 @@ public class ClientDto {
         this.email = client.getEmail();
         this.birthDate = client.getBirthDate();
         this.typeUser = client.getTypeUser();
+        this.card = client.getCard();
+        this.performances.addAll(client.getPerformances());
     }
 
     public Long getId() {
@@ -45,7 +51,15 @@ public class ClientDto {
         return typeUser;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
+    public List<Performance> getPerformances() {
+        return performances;
+    }
+
     public static Page<ClientDto> converter(Page<Client> clients) {
-        return clients.map(ClientDto::new);
+        return clients.map(client -> new ClientDto(client));
     }
 }

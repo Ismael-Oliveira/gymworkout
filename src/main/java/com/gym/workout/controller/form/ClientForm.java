@@ -5,12 +5,9 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
-
+import com.gym.workout.model.Card;
 import com.gym.workout.model.Client;
 import com.gym.workout.model.Register;
 import com.gym.workout.model.TypeUser;
@@ -25,6 +22,8 @@ public class ClientForm {
     private Date birthDate;
     @NotNull
     private TypeUser typeUser;
+
+    private Card card;
 
     public String getEmail() {
         return email;
@@ -42,13 +41,18 @@ public class ClientForm {
         return typeUser;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
     public Client converter(RegisterRepository registerRepository) {
         Register register = registerRepository.findAll().get(0);
         Integer value = register.getRegister();
         value++;
         register.setRegister(value);
         registerRepository.save(register);
-        return new Client(value, this.getName(), this.getEmail(), convertToLocalDate(), this.getTypeUser(), value.toString());
+        return new Client(value, this.getName(), this.getEmail(), convertToLocalDate(), this.getTypeUser(),
+                value.toString(), this.getCard());
     }
 
     private LocalDate convertToLocalDate() {

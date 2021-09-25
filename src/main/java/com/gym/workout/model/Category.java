@@ -1,11 +1,17 @@
 package com.gym.workout.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category {
@@ -14,6 +20,13 @@ public class Category {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Workout> planning = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<Card> cards = new HashSet<>();
 
     public Category() {}
 
@@ -36,6 +49,22 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Workout> getPlanning() {
+        return planning;
+    }
+
+    public void setPlanning(Set<Workout> planning) {
+        this.planning = planning;
+    }
+
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
     }
 
     @Override

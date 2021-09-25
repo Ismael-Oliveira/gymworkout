@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Workout {
@@ -18,13 +22,19 @@ public class Workout {
     private Integer weight;
     private Integer series;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Workout() {}
 
-    public Workout(String nameExercise, Integer loop, Integer weight, Integer series) {
+    public Workout(String nameExercise, Integer loop, Integer weight, Integer series, Category category) {
         this.nameExercise = nameExercise;
         this.loop = loop;
         this.weight = weight;
         this.series = series;
+        this.category = category;
     }
 
     public Long getId() {
@@ -65,6 +75,14 @@ public class Workout {
 
     public void setSeries(Integer series) {
         this.series = series;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

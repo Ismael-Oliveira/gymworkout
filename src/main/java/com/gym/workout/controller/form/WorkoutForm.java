@@ -1,5 +1,6 @@
 package com.gym.workout.controller.form;
 
+import com.gym.workout.model.Category;
 import com.gym.workout.model.Workout;
 
 public class WorkoutForm {
@@ -8,6 +9,7 @@ public class WorkoutForm {
     private Integer loop;
     private Integer weight;
     private Integer series;
+    private Category category;
 
     public String getNameExercise() {
         return nameExercise;
@@ -26,6 +28,6 @@ public class WorkoutForm {
     }
 
     public Workout converter() {
-        return new Workout(this.getNameExercise(), this.getLoop(), this.getWeight(), this.getSeries());
+        return new Workout(this.getNameExercise(), this.getLoop(), this.getWeight(), this.getSeries(), category);
     }
 }

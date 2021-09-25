@@ -1,8 +1,5 @@
 package com.gym.workout.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +13,10 @@ import com.gym.workout.controller.form.ClientForm;
 import com.gym.workout.controller.form.UpdateClientForm;
 import com.gym.workout.dto.ClientDto;
 import com.gym.workout.model.Client;
-import com.gym.workout.model.Register;
 import com.gym.workout.repository.ClientRepository;
 import com.gym.workout.repository.RegisterRepository;
 import com.gym.workout.service.exceptions.DatabaseException;
 import com.gym.workout.service.exceptions.ResourceNotFoundException;
-
-import net.bytebuddy.implementation.bytecode.Throw;
 
 @Service
 public class ClientService {
