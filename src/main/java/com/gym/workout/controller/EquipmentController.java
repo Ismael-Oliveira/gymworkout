@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,19 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.gym.workout.controller.form.ClientForm;
 import com.gym.workout.controller.form.EquipmentForm;
-import com.gym.workout.controller.form.UpdateClientForm;
 import com.gym.workout.controller.form.UpdateEquipmentForm;
-import com.gym.workout.dto.ClientDto;
 import com.gym.workout.dto.EquipmentDto;
-import com.gym.workout.service.ClientService;
 import com.gym.workout.service.EquipmentService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/api")
 @Api(value="Api rest clientes")

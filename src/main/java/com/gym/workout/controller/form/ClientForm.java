@@ -15,10 +15,12 @@ import com.gym.workout.repository.RegisterRepository;
 
 public class ClientForm {
 
-    @NotNull
+    @NotNull(message="Nome: Não pode ser nulo.")
     private String name;
-    @NotNull @Email
+    @NotNull(message="Email: Não pode ser nulo e deve possuir um email válido.")
+    @Email
     private String email;
+    @NotNull(message="Data de aniversário: Não pode ser nulo.")
     private Date birthDate;
     @NotNull
     private TypeUser typeUser;

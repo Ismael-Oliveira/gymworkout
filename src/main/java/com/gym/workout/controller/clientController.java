@@ -31,7 +31,6 @@ import com.gym.workout.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/api")
 @Api(value="Api rest clientes")
