@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,10 @@ public class Client {
     private Long id;
     private Integer register;
     private String name;
+
+    @Column(unique = true)
     private String email;
+
     private LocalDate birthDate;
     private TypeUser typeUser;
     private String password;
