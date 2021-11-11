@@ -47,7 +47,7 @@ public class CategoryController {
     @GetMapping("/categories")
     @ApiOperation(value="Retorna uma lista de categorias de exercícios")
     public ResponseEntity<Page<CategoryDto>> list(@PageableDefault(sort = "name", direction = Sort.Direction.ASC, page = 0,
-            size = 10) Pageable page) {
+            size = 1000) Pageable page) {
 
         Page<CategoryDto> categoryDtos = categoryService.findAll(page);
         return ResponseEntity.ok().body(categoryDtos);

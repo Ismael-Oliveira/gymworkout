@@ -25,12 +25,15 @@ public class UserGymWorkout {
     @NotEmpty(message = "{senha é obrigatório.}")
     private String password;
 
+    private TypeUser typeUser;
+
     public UserGymWorkout() {
     }
 
-    public UserGymWorkout(String username, String password) {
+    public UserGymWorkout(String username, String password, TypeUser typeUser) {
         this.username = username;
         this.password = password;
+        this.typeUser = typeUser;
     }
 
     public Long getId() {
@@ -51,6 +54,14 @@ public class UserGymWorkout {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public TypeUser getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(TypeUser typeUser) {
+        this.typeUser = typeUser;
     }
 
     @Override

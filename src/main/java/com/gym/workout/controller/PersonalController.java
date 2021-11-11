@@ -49,7 +49,7 @@ public class PersonalController {
     @GetMapping("/personals")
     @ApiOperation(value="Retorna uma lista de instrutores")
     public ResponseEntity<Page<PersonalDto>> list(@PageableDefault(sort = "name", direction = Sort.Direction.ASC, page = 0,
-            size = 10) Pageable page) {
+            size = 1000) Pageable page) {
 
         Page<PersonalDto> personalDtos = personalService.findAll(page);
         return ResponseEntity.ok().body(personalDtos);

@@ -52,7 +52,7 @@ public class clientController {
     @GetMapping("/clients")
     @ApiOperation(value="Retorna uma lista de alunos")
     public ResponseEntity<Page<ClientDto>> list(@PageableDefault(sort = "name", direction = Sort.Direction.ASC, page = 0,
-            size = 10) Pageable page) {
+            size = 1000) Pageable page) {
 
         Page<ClientDto> clientDtos = clienteService.findAll(page);
         return ResponseEntity.ok().body(clientDtos);

@@ -50,7 +50,7 @@ public class EquipmentController {
     @GetMapping("/equipments")
     @ApiOperation(value="Retorna uma lista de equipamentos")
     public ResponseEntity<Page<EquipmentDto>> list(@PageableDefault(sort = "name", direction = Sort.Direction.ASC, page = 0,
-            size = 10) Pageable page) {
+            size = 1000) Pageable page) {
 
         Page<EquipmentDto> equipmentDtos = equipmentService.findAll(page);
         return ResponseEntity.ok().body(equipmentDtos);

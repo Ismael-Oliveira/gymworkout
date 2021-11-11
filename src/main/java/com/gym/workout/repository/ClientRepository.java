@@ -7,4 +7,6 @@ import com.gym.workout.model.Client;
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
     Client getByRegister(Integer registerClient);
+
+    boolean existsByEmail(String email);
 }

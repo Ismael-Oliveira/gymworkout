@@ -1,6 +1,7 @@
 package com.gym.workout.dto;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ClientDto {
     private Long id;
     private String name;
     private String email;
-    private LocalDate birthDate;
+    private String birthDate;
     private TypeUser typeUser;
     private Card card;
     private List<Performance> performances = new ArrayList<>();
@@ -25,7 +26,7 @@ public class ClientDto {
         this.id = client.getId();
         this.name = client.getName();
         this.email = client.getEmail();
-        this.birthDate = client.getBirthDate();
+        this.birthDate = client.getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.typeUser = client.getTypeUser();
         this.card = client.getCard();
         this.performances.addAll(client.getPerformances());
@@ -43,7 +44,7 @@ public class ClientDto {
         return email;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 

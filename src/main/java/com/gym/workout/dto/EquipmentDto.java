@@ -1,26 +1,29 @@
 package com.gym.workout.dto;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.data.domain.Page;
 
 import com.gym.workout.model.Equipment;
-import com.gym.workout.model.StatusEquipment;
 
 public class EquipmentDto {
 
     private Long id;
     private String name;
-    private LocalDate date;
+    private String date;
     private Integer code;
-    private StatusEquipment statusEquipment;
+    private String statusEquipment;
+    private Long timeUse;
 
     public EquipmentDto(Equipment equipment) {
         this.id = equipment.getId();
         this.name = equipment.getName();
-        this.date = equipment.getDate();
+        this.date = equipment.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.code = equipment.getCode();
-        this.statusEquipment = equipment.getStatusEquipment();
+        this.statusEquipment = equipment.getStatusEquipment().getDescription();
+        this.timeUse = ChronoUnit.YEARS.between(equipment.getDate(), LocalDate.now());
     }
 
     public Long getId() {
@@ -31,7 +34,7 @@ public class EquipmentDto {
         return name;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -39,8 +42,12 @@ public class EquipmentDto {
         return code;
     }
 
-    public StatusEquipment getStatusEquipment() {
+    public String getStatusEquipment() {
         return statusEquipment;
+    }
+
+    public Long getTimeUse() {
+        return timeUse;
     }
 
     public static Page<EquipmentDto> converter(Page<Equipment> equipments) {

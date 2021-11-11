@@ -49,7 +49,7 @@ public class WorkoutController {
     @GetMapping("/workouts")
     @ApiOperation(value="Retorna uma lista de exercícios")
     public ResponseEntity<Page<WorkoutDto>> list(@PageableDefault(sort = "nameExercise", direction = Sort.Direction.ASC, page = 0,
-            size = 10) Pageable page) {
+            size = 1000) Pageable page) {
 
         Page<WorkoutDto> workoutDtos = workoutService.findAll(page);
         return ResponseEntity.ok().body(workoutDtos);

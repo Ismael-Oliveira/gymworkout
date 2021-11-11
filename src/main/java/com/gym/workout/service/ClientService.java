@@ -13,8 +13,10 @@ import com.gym.workout.controller.form.ClientForm;
 import com.gym.workout.controller.form.UpdateClientForm;
 import com.gym.workout.dto.ClientDto;
 import com.gym.workout.model.Client;
+import com.gym.workout.model.UserGymWorkout;
 import com.gym.workout.repository.ClientRepository;
 import com.gym.workout.repository.RegisterRepository;
+import com.gym.workout.repository.UserRepository;
 import com.gym.workout.service.exceptions.DatabaseException;
 import com.gym.workout.service.exceptions.ResourceNotFoundException;
 
@@ -27,10 +29,18 @@ public class ClientService {
     @Autowired
     RegisterRepository registerRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public ClientDto create(ClientForm clientForm) {
+        boolean exists = clientRepository.existsByEmail(clientForm.getEmail());
+        if(exists) {
+            throw new DatabaseException("Tente outro! " + clientForm.getEmail() + " já esta cadastrado.");
+        }
 
         Client client = clientForm.converter(registerRepository);
         client = clientRepository.save(client);
+        saveUserGym(client);
         return new ClientDto(client);
     }
 
@@ -76,4 +86,10 @@ public class ClientService {
             throw new ResourceNotFoundException(registerClient);
         }
     }
+
+    private void saveUserGym(Client client) {
+        UserGymWorkout user = new UserGymWorkout(client.getEmail(), client.getPassword(), client.getTypeUser());
+        userRepository.save(user);
+    }
+
 }

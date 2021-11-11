@@ -47,8 +47,7 @@ public class PerformanceController {
     @GetMapping("/performances")
     @ApiOperation(value="Retornar lista de avaliações físicas")
     public ResponseEntity<Page<PerformanceDto>> list(@PageableDefault(sort = "dateEvaluation", direction = Sort.Direction.ASC,
-            page = 0,
-            size = 10) Pageable page) {
+            page = 0, size = 1000) Pageable page) {
 
         Page<PerformanceDto> performanceDtos = performanceService.findAll(page);
         return ResponseEntity.ok().body(performanceDtos);
