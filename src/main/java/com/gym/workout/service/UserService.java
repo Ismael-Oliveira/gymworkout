@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
 
         return User
                 .builder()
-                .username(userGymWorkout.getUsername())
+                .username(userGymWorkout.getUsername()+" "+userGymWorkout.getId_user())
                 .password(userGymWorkout.getPassword())
                 .roles(userGymWorkout.getTypeUser().toString())
                 .build();

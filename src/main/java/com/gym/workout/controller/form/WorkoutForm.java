@@ -27,7 +27,11 @@ public class WorkoutForm {
         return series;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     public Workout converter() {
-        return new Workout(this.getNameExercise(), this.getLoop(), this.getWeight(), this.getSeries(), category);
+        return new Workout(this.getNameExercise(), this.getLoop(), this.getWeight(), this.getSeries(), this.getCategory());
     }
 }

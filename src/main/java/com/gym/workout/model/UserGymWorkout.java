@@ -27,13 +27,16 @@ public class UserGymWorkout {
 
     private TypeUser typeUser;
 
+    private Long id_user;
+
     public UserGymWorkout() {
     }
 
-    public UserGymWorkout(String username, String password, TypeUser typeUser) {
+    public UserGymWorkout(String username, String password, TypeUser typeUser, Long id_user) {
         this.username = username;
         this.password = password;
         this.typeUser = typeUser;
+        this.id_user = id_user;
     }
 
     public Long getId() {
@@ -62,6 +65,14 @@ public class UserGymWorkout {
 
     public void setTypeUser(TypeUser typeUser) {
         this.typeUser = typeUser;
+    }
+
+    public long getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(Long id_user) {
+        this.id_user = id_user;
     }
 
     @Override

@@ -12,6 +12,7 @@ public class WorkoutDto {
     private Integer loop;
     private Integer weight;
     private Integer series;
+    private Boolean selectedExercise;
 
     public WorkoutDto(Workout workout) {
         this.id = workout.getId();
@@ -19,6 +20,7 @@ public class WorkoutDto {
         this.loop = workout.getLoop();
         this.weight = workout.getWeight();
         this.series = workout.getSeries();
+        this.selectedExercise = workout.getSelectedExercise();
     }
 
     public Long getId() {
@@ -39,6 +41,10 @@ public class WorkoutDto {
 
     public Integer getSeries() {
         return series;
+    }
+
+    public Boolean getSelectedExercise() {
+        return selectedExercise;
     }
 
     public static Page<WorkoutDto> converter(Page<Workout> workouts) {

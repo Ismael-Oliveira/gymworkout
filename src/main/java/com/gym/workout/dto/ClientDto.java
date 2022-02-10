@@ -1,15 +1,17 @@
 package com.gym.workout.dto;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 
 import com.gym.workout.model.Card;
 import com.gym.workout.model.Client;
 import com.gym.workout.model.Performance;
+import com.gym.workout.model.SpreadSheet;
 import com.gym.workout.model.TypeUser;
 
 public class ClientDto {
@@ -19,8 +21,10 @@ public class ClientDto {
     private String email;
     private String birthDate;
     private TypeUser typeUser;
+    private Instant dateCreated;
     private Card card;
     private List<Performance> performances = new ArrayList<>();
+    private List<SpreadSheet> spreadSheet = new ArrayList<>();
 
     public ClientDto(Client client) {
         this.id = client.getId();
@@ -29,7 +33,9 @@ public class ClientDto {
         this.birthDate = client.getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.typeUser = client.getTypeUser();
         this.card = client.getCard();
+        this.dateCreated = client.getDateCreate();
         this.performances.addAll(client.getPerformances());
+//        this.spreadSheet.addAll(client.getSpreadSheet());
     }
 
     public Long getId() {
@@ -56,8 +62,16 @@ public class ClientDto {
         return card;
     }
 
+    public Instant getDateCreated() {
+        return dateCreated;
+    }
+
     public List<Performance> getPerformances() {
         return performances;
+    }
+
+    public List<SpreadSheet> getSpreadSheet() {
+        return spreadSheet;
     }
 
     public static Page<ClientDto> converter(Page<Client> clients) {

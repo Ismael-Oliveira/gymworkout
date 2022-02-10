@@ -63,7 +63,7 @@ public class CategoryController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping(value = "/categories{id}")
+    @DeleteMapping(value = "/categories/{id}")
     @ApiOperation(value="Deleta uma categoria")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         categoryService.delete(id);

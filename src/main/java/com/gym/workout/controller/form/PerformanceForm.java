@@ -9,6 +9,7 @@ public class PerformanceForm {
     private Integer age;
     private Integer sex;
     private String observation;
+    private Long idUser;
 
     public PerformanceForm () {}
 
@@ -46,6 +47,10 @@ public class PerformanceForm {
 
     public Double bodyFat() {
         return null;
+    }
+
+    public Long getIdUser() {
+        return idUser;
     }
 
     public Performance converter() {

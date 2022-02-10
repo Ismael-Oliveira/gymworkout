@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.gym.workout.controller.form.ClientForm;
 import com.gym.workout.controller.form.UpdateClientForm;
+import com.gym.workout.controller.form.UpdateSpreadSheetForm;
 import com.gym.workout.dto.ClientDto;
 import com.gym.workout.model.Client;
 import com.gym.workout.model.UserGymWorkout;
+import com.gym.workout.repository.CardRepository;
 import com.gym.workout.repository.ClientRepository;
 import com.gym.workout.repository.RegisterRepository;
+import com.gym.workout.repository.SpreadSheetRepository;
 import com.gym.workout.repository.UserRepository;
 import com.gym.workout.service.exceptions.DatabaseException;
 import com.gym.workout.service.exceptions.ResourceNotFoundException;
@@ -31,6 +34,12 @@ public class ClientService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CardRepository cardRepository;
+
+    @Autowired
+    SpreadSheetRepository spreadSheetRepository;
 
     public ClientDto create(ClientForm clientForm) {
         boolean exists = clientRepository.existsByEmail(clientForm.getEmail());
@@ -67,6 +76,11 @@ public class ClientService {
         return new ClientDto(client);
     }
 
+    public ClientDto updateSpreadSheet(Long id, UpdateSpreadSheetForm updateSpreadSheetForm) {
+        Client client = updateSpreadSheetForm.update(id, clientRepository, cardRepository, spreadSheetRepository);
+        return new ClientDto(client);
+    }
+
     public void delete(Long id) {
         try {
             clientRepository.deleteById(id);
@@ -88,7 +102,7 @@ public class ClientService {
     }
 
     private void saveUserGym(Client client) {
-        UserGymWorkout user = new UserGymWorkout(client.getEmail(), client.getPassword(), client.getTypeUser());
+        UserGymWorkout user = new UserGymWorkout(client.getEmail(), client.getPassword(), client.getTypeUser(), client.getId());
         userRepository.save(user);
     }
 

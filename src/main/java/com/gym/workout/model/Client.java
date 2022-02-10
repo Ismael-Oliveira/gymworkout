@@ -1,5 +1,6 @@
 package com.gym.workout.model;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Client {
     private Long id;
     private Integer register;
     private String name;
+    private Instant dateCreate;
 
     @Column(unique = true)
     private String email;
@@ -42,6 +44,11 @@ public class Client {
     @JoinColumn(name = "performance_id"))
     private List<Performance> performances = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(name = "tb_client_spreadsheet", joinColumns = @JoinColumn(name = "client_id"), inverseJoinColumns =
+    @JoinColumn(name = "spreadsheet_id"))
+    private List<SpreadSheet> spreadSheet = new ArrayList<>();
+
     public Client() {}
 
     public Client(Integer register, String name, String email, LocalDate birthDate, TypeUser typeUser, String password,
@@ -53,6 +60,7 @@ public class Client {
         this.typeUser = typeUser;
         this.password = password;
         this.card = card;
+        this.dateCreate = Instant.now();
     }
 
     public Long getId() {
@@ -129,6 +137,18 @@ public class Client {
 
     public List<Performance> getPerformances() {
         return performances;
+    }
+
+    public Instant getDateCreate() {
+        return dateCreate;
+    }
+
+    public List<SpreadSheet> getSpreadSheet() {
+        return spreadSheet;
+    }
+
+    public void setSpreadSheet(List<SpreadSheet> spreadSheet) {
+        this.spreadSheet = spreadSheet;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/api/**").authenticated()
-                .antMatchers().hasAnyRole("ADMINISTRATOR", "CLIENT")
+                .antMatchers().hasAnyRole("ADMINISTRATOR","PERSONAL", "CLIENT")
                     .antMatchers("/api/**").permitAll();
 //                .antMatchers("/api/categories").permitAll();
 //                .anyRequest().denyAll();

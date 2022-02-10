@@ -1,9 +1,7 @@
 package com.gym.workout.controller;
 
 import java.net.URI;
-import java.util.List;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +22,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.gym.workout.controller.form.ClientForm;
 import com.gym.workout.controller.form.UpdateClientForm;
+import com.gym.workout.controller.form.UpdateSpreadSheetForm;
 import com.gym.workout.dto.ClientDto;
-import com.gym.workout.model.Client;
 import com.gym.workout.service.ClientService;
 
 import io.swagger.annotations.Api;
@@ -35,7 +32,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping(value="/api")
 @Api(value="Api rest clientes")
-public class clientController {
+public class ClientController {
 
     @Autowired
     ClientService clienteService;
@@ -74,6 +71,16 @@ public class clientController {
         ClientDto clientDto = clienteService.update(id, updateClientForm);
         if(clientDto != null) {
             return ResponseEntity.ok().body(clientDto);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping(value = "/clients/spread-sheet/{id}")
+    public ResponseEntity updateSpreadSheet(@PathVariable Long id, @RequestBody UpdateSpreadSheetForm updateSpreadSheetForm) {
+
+        ClientDto clientDto = clienteService.updateSpreadSheet(id, updateSpreadSheetForm);
+        if(clientDto != null) {
+            return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
     }

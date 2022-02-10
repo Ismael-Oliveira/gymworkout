@@ -2,6 +2,8 @@ package com.gym.workout.model;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Embeddable
 public class Workout {
 
     @Id
@@ -21,6 +24,7 @@ public class Workout {
     private Integer loop;
     private Integer weight;
     private Integer series;
+    private Boolean selectedExercise = true;
 
     @JsonIgnore
     @ManyToOne
@@ -75,6 +79,14 @@ public class Workout {
 
     public void setSeries(Integer series) {
         this.series = series;
+    }
+
+    public Boolean getSelectedExercise() {
+        return selectedExercise;
+    }
+
+    public void setSelectedExercise(Boolean selectedExercise) {
+        this.selectedExercise = selectedExercise;
     }
 
     public Category getCategory() {

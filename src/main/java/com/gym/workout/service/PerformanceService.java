@@ -1,7 +1,5 @@
 package com.gym.workout.service;
 
-import java.util.List;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.gym.workout.controller.form.PerformanceForm;
 import com.gym.workout.dto.PerformanceDto;
+import com.gym.workout.model.Client;
 import com.gym.workout.model.Performance;
+import com.gym.workout.repository.ClientRepository;
 import com.gym.workout.repository.PerformanceRepository;
 import com.gym.workout.service.exceptions.ResourceNotFoundException;
 
@@ -22,10 +22,18 @@ public class PerformanceService {
     @Autowired
     PerformanceRepository performanceRepository;
 
-    public PerformanceDto create(PerformanceForm personalForm) {
+    @Autowired
+    ClientRepository clientRepository;
 
-        Performance performance = personalForm.converter();
+    public PerformanceDto create(PerformanceForm performanceForm) {
+
+        Performance performance = performanceForm.converter();
         performance = performanceRepository.save(performance);
+
+        Client client = clientRepository.getById(performanceForm.getIdUser());
+        client.getPerformances().add(performance);
+        clientRepository.save(client);
+
         return new PerformanceDto(performance);
     }
 

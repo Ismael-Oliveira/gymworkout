@@ -1,7 +1,5 @@
 package com.gym.workout.controller.form;
 
-import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.dao.EmptyResultDataAccessException;
