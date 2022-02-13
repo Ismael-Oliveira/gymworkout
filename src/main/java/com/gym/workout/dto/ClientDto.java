@@ -21,6 +21,7 @@ public class ClientDto {
     private String email;
     private String birthDate;
     private TypeUser typeUser;
+    private String password;
     private Instant dateCreated;
     private Card card;
     private List<Performance> performances = new ArrayList<>();
@@ -32,6 +33,7 @@ public class ClientDto {
         this.email = client.getEmail();
         this.birthDate = client.getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.typeUser = client.getTypeUser();
+        this.password = client.getPassword();
         this.card = client.getCard();
         this.dateCreated = client.getDateCreate();
         this.performances.addAll(client.getPerformances());
@@ -56,6 +58,10 @@ public class ClientDto {
 
     public TypeUser getTypeUser() {
         return typeUser;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public Card getCard() {
